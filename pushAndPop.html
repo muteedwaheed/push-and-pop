@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Stack Implementation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .stack-container {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        width: 300px;
+      }
+
+      .stack {
+        border: 2px solid #007bff;
+        border-radius: 5px;
+        padding: 10px;
+        height: 200px; /* Adjust the height as needed */
+        overflow-y: auto;
+        margin-bottom: 10px;
+      }
+
+      .stack-item {
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+      }
+
+      .stack-item:first-child {
+        margin-top: auto; /* Pushes the first item to the bottom */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stack-container">
+      <h2>Stack Implementation</h2>
+      <div class="stack" id="stackDisplay">
+        <!-- Stack items will be added dynamically here -->
+      </div>
+      <input type="text" placeholder="Enter element" id="newElement" />
+      <br /><br />
+      <button onclick="push()">Push Element</button>
+      <button onclick="pop()">Pop Element</button>
+    </div>
+
+    <script>
+      let stack = [];
+      const max = 5;
+
+      const push = () => {
+        let newValue = document.getElementById("newElement").value;
+        if (stack.length >= max) {
+          alert("Stack Overflow: Cannot add more than 5 elements.");
+        } else {
+          stack.push(newValue);
+          displayStack();
+          document.getElementById("newElement").value = "";
+          console.log("Element added: " + newValue);
+        }
+      };
+
+      const pop = () => {
+        if (stack.length === 0) {
+          alert("Stack Underflow: Stack is empty.");
+        } else {
+          stack.pop();
+          displayStack();
+        }
+      };
+
+      const displayStack = () => {
+        let stackDisplay = document.getElementById("stackDisplay");
+        stackDisplay.innerHTML = "";
+        for (let i = stack.length - 1; i >= 0; i--) {
+          let stackItem = document.createElement("div");
+          stackItem.classList.add("stack-item");
+          stackItem.innerText = stack[i];
+          stackDisplay.appendChild(stackItem);
+        }
+      };
+    </script>
+  </body>
+</html>
